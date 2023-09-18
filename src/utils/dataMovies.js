@@ -7,13 +7,6 @@ const dataMovies = [
     isFavoriteMovie: 0,
   },
   {
-    id: '2',
-    nameMovie: 'Гордость и предубеждение',
-    durationMovie: '2ч07м',
-    linkMovie: 'https://trikky.ru/wp-content/blogs.dir/1/files/2023/05/07/o-o.jpeg',
-    isFavoriteMovie: 1,
-  },
-  {
     id: '3',
     nameMovie: 'Третий лишний',
     durationMovie: '1ч46м',
@@ -49,13 +42,6 @@ const dataMovies = [
     isFavoriteMovie: 0,
   },
   {
-    id: '8',
-    nameMovie: 'Гордость и предубеждение',
-    durationMovie: '2ч07м',
-    linkMovie: 'https://trikky.ru/wp-content/blogs.dir/1/files/2023/05/07/o-o.jpeg',
-    isFavoriteMovie: 1,
-  },
-  {
     id: '9',
     nameMovie: 'Третий лишний',
     durationMovie: '1ч46м',
@@ -89,13 +75,6 @@ const dataMovies = [
     durationMovie: '1ч42м',
     linkMovie: 'https://i.pinimg.com/736x/de/8a/10/de8a10ed1590287e0728d2428537ab99.jpg',
     isFavoriteMovie: 0,
-  },
-  {
-    id: '14',
-    nameMovie: 'Гордость и предубеждение',
-    durationMovie: '2ч07м',
-    linkMovie: 'https://trikky.ru/wp-content/blogs.dir/1/files/2023/05/07/o-o.jpeg',
-    isFavoriteMovie: 1,
   },
   {
     id: '15',

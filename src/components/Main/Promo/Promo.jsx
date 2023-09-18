@@ -1,5 +1,5 @@
 import { NavTab } from '../../';
-import promoLogo from '../../../images/promo_logo.svg'
+import promo from '../../../images/promo_logo.svg';
 import './Promo.css';
 
 function Promo() {
@@ -14,7 +14,7 @@ function Promo() {
         </h2>
         <NavTab />
       </div>
-      <img className="promo__logo" src={promoLogo} alt='Логотип титульной страницы.' />
+      <img className="promo__logo" src={promo} alt='Логотип титульной страницы.' />
     </section>
 
   );

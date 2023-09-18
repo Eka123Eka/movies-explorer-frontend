@@ -1,5 +1,4 @@
 .search-form {
-  margin: 0;
   padding: 70px 70px 48px;
 }
 
@@ -24,6 +23,10 @@
   color: #8B8B8B;
 }
 
+.search-form__input:hover {
+  outline: 1px solid #AAAAAA;
+}
+
 .search-form__submit-button {
   width: 80px;
   height: 47px;
@@ -35,7 +38,7 @@
   cursor: pointer;
 }
 
-.search-form__btn:hover {
+.search-form__submit-button:hover {
   opacity: 0.8;
 }
 

@@ -3,14 +3,13 @@
   width:  38px;
 }
 
-.logo__link {
+.logo-link {
   display: flex;
   cursor: pointer;
   transition: opacity 0.3s linear;
   text-decoration: none;
 }
 
-.logo__link:hover {
+.logo-link:hover {
   opacity: 0.7;
 }
-

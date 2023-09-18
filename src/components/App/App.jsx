@@ -11,7 +11,7 @@ import './App.css';
 function App() {
   const { pathname } = useLocation();
   let isLogIn = false;
-  pathname === '/' ? isLogIn = false : isLogIn = true;
+  pathname === '/' ? isLogIn = true : isLogIn = true;
   return (
     <div className='app'>
       <Routes>

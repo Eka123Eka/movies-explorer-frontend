@@ -1,5 +1,7 @@
 .register {
   display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .register__container {

@@ -5,10 +5,10 @@ function SavedMovies({ isLogIn }) {
   return (
     <>
     	<Header isLogIn={isLogIn}/>
-      <section className='saved-movies'>
+      <main className='saved-movies'>
 			  <SearchForm />
         <MoviesCardList />
-      </section>
+      </main>
       <Footer />
     </>
   );

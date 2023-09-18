@@ -17,7 +17,7 @@ function Login() {
               placeholder='Укажите электронную почту'
               minLength='5' maxLength='100'
               autoComplete='off'
-              autoCapitalize='none'
+              autocapitalize='none'
               required
             />
             <span className='login__input-error'></span>
@@ -30,7 +30,7 @@ function Login() {
               placeholder='Введите пароль'
               minLength='4' maxLength='40'
               autoComplete='off'
-              autoCapitalize='none'
+              autocapitalize='none'
               required
             />
             <span className='login__input-error'></span>

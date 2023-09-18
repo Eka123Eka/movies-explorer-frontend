@@ -4,11 +4,14 @@ import './Header.css';
 
 function Header({ isLogIn }) {
   const location = useLocation();
+  const isMainPage = location.pathname === '/';
   return (
-    <header className={isLogIn ? 'header header_login' : 'header'}>
-      <Logo />
+    <header className={isMainPage ? 'header header_main-page' : 'header'}>
+      <div className='header__logo'>
+        <Logo />
+      </div>
       {isLogIn
-        ? <Navigation />
+        ? <Navigation isMainPage = {isMainPage}/>
         : (location.pathname !== '/signup') && (location.pathname !== '/signin') && (
           <nav className='header__group-button'>
             <HeaderButton

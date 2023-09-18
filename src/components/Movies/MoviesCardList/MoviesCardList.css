@@ -24,7 +24,7 @@
   transform: scale(1.1);
 }
 
-.cards_more-button {
+.cards-more-button {
   width: 320px;
   height: 36px;
   margin: 50px auto 80px;
@@ -40,7 +40,7 @@
   transition: opacity 0.3s linear;
 }
 
-.cards_more-button:hover {
+.cards-more-button:hover {
   opacity: 0.8;
 }
 
@@ -60,7 +60,7 @@
     padding-top: 40px
   }
 
-  .cards_more-button {
+  .cards-more-button {
     width: 240px;
   }
 

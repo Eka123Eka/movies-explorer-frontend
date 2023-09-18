@@ -1,13 +1,14 @@
 import { Header, SearchForm, MoviesCardList, Footer } from '../';
+import './Movies.css';
 
 function Movies( { isLogIn } ) {
   return (
     <>
     	<Header isLogIn={isLogIn}/>
-      <section className='movies'>
+      <main className='movies'>
 			  <SearchForm />
         <MoviesCardList />
-      </section>
+      </main>
       <Footer />
     </>
   );
