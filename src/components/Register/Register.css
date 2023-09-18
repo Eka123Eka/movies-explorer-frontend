@@ -1,0 +1,129 @@
+.register {
+  display: flex;
+}
+
+.register__container {
+  min-width: 396px;
+  margin: 70px auto;
+}
+
+.register__title {
+  margin: 40px 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.register__form {
+  width: 100%;
+}
+
+.register__label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+}
+
+.register__input {
+  min-height: 46px;
+  margin: 10px 0 0;
+  padding: 0 0 0 15px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  background-color: #2F2F2F;
+}
+
+.register__input-error {
+  display: flex;
+  align-items: flex-end;
+  height: 20px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.register__input-error_last {
+  height: 22px;
+}
+
+.register__button {
+  min-height: 45px;
+  width: 100%;
+  margin: 69px 0 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  background-color: #4285F4;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.register__button:hover {
+  opacity: 0.8;
+}
+
+.register__text-item {
+  margin: 16px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+}
+
+.register__link-item {
+  color: #4285F4;
+  text-decoration: none;
+  transition: opacity 0.3s linear;
+}
+
+.register__link-item:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 800px) {
+  .register__container {
+    margin-top: 232px;
+    margin-bottom: 232px;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .register__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+    margin-top: 56px;
+    margin-bottom: 30px;
+  }
+
+  .register__title {
+    margin-top: 50px;
+    margin-bottom: 80px;
+  }
+
+  .register__button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 157px;
+  }
+
+  .register__text-item {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

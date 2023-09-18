@@ -1,0 +1,48 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 18px 70px;
+  background: #073042;
+}
+.header_login {
+  background: #202020;
+}
+
+.header__group-button {
+  display: flex;
+}
+
+.header__link {
+  transition: opacity 0.3s linear;
+  text-decoration: none;
+}
+
+.header__link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left:  30px;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .header {
+    padding-right: 14px;
+    padding-bottom: 16px;
+    padding-left:  14px;
+  }
+}
+
+
+
+
+
+
+
