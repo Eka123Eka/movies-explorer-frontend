@@ -1,0 +1,128 @@
+.profile {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.profile__container {
+  align-items: center;
+  min-width: 410px;
+  margin: 74px auto 70px;
+}
+
+.profile__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+}
+
+.profile__form {
+  margin: 123px auto 0;
+}
+
+.profile__label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+}
+.profile__label:not(:first-of-type) {
+  margin: 16px 0 0;
+  padding: 17px 0 0;
+  border-top: solid 1px #424242;}
+
+.profile__input {
+  width: 50%;
+  border: none;
+  padding: 0;
+  color: #fff;
+  background-color: #202020;
+  text-align: end;
+}
+
+.profile__footer {
+  margin: 220px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__edit-button {
+  padding: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #fff;
+  border: none;
+  background-color: #202020;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.8;
+}
+
+.profile__quit-link {
+  margin: 16px 0 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #EE3465;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+}
+
+.profile__quit-link:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 800px) {
+  .profile__container {
+    margin-top: 236px;
+    margin-bottom: 195px;
+  }
+
+  .profile__form {
+    margin-top: 96px;
+  }
+
+  .profile__footer {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 519px) {
+  .profile__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+    margin-top: 70px;
+    margin-bottom: 40px;
+  }
+
+  .profile__form {
+    margin-top: 80px;
+  }
+
+  .profile__footer {
+    min-width: 260px;
+    margin-top: 379px;
+  }
+
+  .profile__edit-button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__quit-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
