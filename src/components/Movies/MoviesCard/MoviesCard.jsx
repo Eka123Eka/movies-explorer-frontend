@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import deleteButton from '../../../images/delete-button.svg';
+import { moviesApi } from '../../';
 import './MoviesCard.css';
 
 function MoviesCard({card, favoriteMovies, onSetLikeCard}) {
@@ -7,7 +8,7 @@ function MoviesCard({card, favoriteMovies, onSetLikeCard}) {
   const isPageMovies = location.pathname === '/movies';
   const isPageSavedMovies = location.pathname === '/saved-movies';
 
-  const image = card.image.url ? `https://api.nomoreparties.co/${card.image.url}` : card.image;
+  const image = card.image.url ? `${moviesApi.baseUrl}/${card.image.url}` : card.image;
   const isfavoriteMovies = favoriteMovies ? favoriteMovies.some((i) => i.movieId === card.id) : false;
 
   function toggleLike() {
