@@ -20,8 +20,7 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-
-
+  margin: 0 0 0 63px;
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
@@ -33,9 +32,11 @@
   text-decoration: none;
   transition: opacity 0.3s linear;
 }
+
 .navigation__link:last-of-type {
   margin-right: 0;
 }
+
 .navigation__link:hover {
   opacity: 0.7;
 }
@@ -179,6 +180,7 @@
 
   .navigation__links {
     margin-top: 159px;
+    margin-left: 0px;
     flex-direction: column;
     font-weight: 500;
     font-size: 18px;

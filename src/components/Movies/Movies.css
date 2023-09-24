@@ -1,4 +1,16 @@
 .movies {
   max-width: 1280px;
   margin: 0 auto;
+  /*display: flex;
+  flex-direction: column;*/
+}
+
+.movies__not-found {
+  margin: 0 auto;
+  padding: 0;
+  text-align: left;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: normal;
+  color: #C2C2C2;
 }

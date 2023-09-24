@@ -21,6 +21,10 @@ import NavTab from './Main/NavTab/NavTab';
 import Portfolio from './Main/Portfolio/Portfolio';
 import Promo from './Main/Promo/Promo';
 import Techs from './Main/Techs/Techs';
+import { CurrentUserContext, AppContext } from './../contexts';
+import {auth, mainApi, moviesApi, messages, const_for_movies} from './../utils';
+import InfoPopup from './Popups/InfoPopup';
+import { useForm, usePopupClose, useFormValidation }  from './hooks';
 
 export {
   App,
@@ -46,4 +50,15 @@ export {
   Portfolio,
   Promo,
   Techs,
+  CurrentUserContext,
+  AppContext,
+  auth,
+  mainApi,
+  moviesApi,
+  InfoPopup,
+  useForm,
+  usePopupClose,
+  useFormValidation,
+  messages,
+  const_for_movies,
 };

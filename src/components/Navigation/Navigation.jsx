@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { usePopupClose } from '../';
 import imgButtonMenu from '../../images/header_menu-button.svg';
 import imgButtonClose from '../../images/close-button.svg';
 import './Navigation.css';
@@ -10,6 +11,9 @@ function Navigation( {isMainPage} ) {
   const togglePopupMenu = () => {
     setIsOpenPopupMenu(!isOpenPopupMenu);
   };
+
+  usePopupClose(isOpenPopupMenu, togglePopupMenu);
+
   return (
     <div className='navigation'>
       <div className='navigation__group'>
