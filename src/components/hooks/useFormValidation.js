@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { const_for_movies } from '../';
 import validator from 'validator';
 
 export default function useFormValidation() {
@@ -16,6 +17,15 @@ export default function useFormValidation() {
       const isValidEmail = validator.isEmail(value);
       setErrors({ ...errors, [name]: isValidEmail ? '' : 'Некорректно введен email' });
       setIsValid(target.closest('form').checkValidity() && isValidEmail);
+    } else {
+      setErrors({...errors, [name]: target.validationMessage });
+      setIsValid(target.closest('form').checkValidity());
+    }
+
+    if (name === "name" && value.length !== 0) {
+      const isValidName = const_for_movies.regEX_name.test(value);
+      setErrors({ ...errors, [name]: isValidName ? '' : 'Некорректно указано имя, только буквы, пробел и дефис' });
+      setIsValid(target.closest('form').checkValidity() && isValidName);
     } else {
       setErrors({...errors, [name]: target.validationMessage });
       setIsValid(target.closest('form').checkValidity());

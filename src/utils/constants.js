@@ -8,6 +8,12 @@ const messages = {
   update_conflict: 'Пользователь с таким email уже существует.',
   server_error: 'На сервере произошла ошибка.',
   other_error: 'Возникла непредвиденная ошибка.',
+  search_error: 'Произошла ошибка. На сервере нет ни одной карточки.',
+  search_not_found: 'По вашему запросу ничего не нашлось.',
+  search_not_added: 'Вы не добавили ни одной карточки',
+  empty_query: 'Введите строку поиска',
+  conflict_unsetLike: 'Эту карточку нельзя удалить. Она выбрана другим пользователем.',
+  default_error: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
 }
 
 const const_for_movies = {
@@ -23,6 +29,8 @@ const const_for_movies = {
   cards_add_768: 2,
   cards_add_1000: 3,
   cards_add_1280: 4,
+  baseUrl: 'https://api.nomoreparties.co/',
+  regEX_name: /^[a-zA-Zа-яА-Я\sё-]+$/,
 }
 
 export {

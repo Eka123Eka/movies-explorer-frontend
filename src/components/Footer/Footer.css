@@ -1,6 +1,9 @@
 .footer {
   max-width: 1280px;
   margin: 59px auto 0;
+  /*margin: 0 auto;
+  position: relative;
+  bottom: 0;*/
 }
 
 .footer__title {
@@ -78,7 +81,6 @@
 
   .footer__container {
     flex-direction: column-reverse;
-    /*padding-top: 0;*/
   }
 
   .footer__copyright {

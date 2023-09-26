@@ -1,4 +1,17 @@
 .saved-movies {
   max-width: 1280px;
   margin: 0 auto;
+  /*display: flex;
+  flex-direction: column;*/
 }
+
+.saved-movies__not-found {
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: normal;
+  color: #C2C2C2;
+}
+

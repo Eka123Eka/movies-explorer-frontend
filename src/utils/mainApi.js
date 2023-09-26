@@ -1,5 +1,5 @@
 import baseUtils from './baseUtils';
-import moviesApi from './moviesApi';
+import {const_for_movies} from './constants';
 
 class MainApi extends baseUtils {
   constructor({ baseUrl, headers }) {
@@ -23,19 +23,19 @@ class MainApi extends baseUtils {
   }
   // 4. Добавим в избранное
   setLikeCard(card) {
-    return this._request('movies', {
+    return this._request('/movies', {
       headers: this._headers,
       method: 'POST',
       body: JSON.stringify({
         year:        card.year,
-        image:       `${moviesApi.baseUrl}/${card.image.url}`,
+        image:       `${const_for_movies.baseUrl}/${card.image.url}`,
         nameRU:      card.nameRU,
         nameEN:      card.nameEN,
         movieId:     card.id,
         country:     card.country,
         director:    card.director,
         duration:    card.duration,
-        thumbnail:   `${moviesApi.baseUrl}/${card.image.formats.thumbnail.url}`,
+        thumbnail:   `${const_for_movies.baseUrl}/${card.image.formats.thumbnail.url}`,
         description: card.description,
         trailerLink: card.trailerLink,
       }),
@@ -51,8 +51,8 @@ class MainApi extends baseUtils {
 }
 
 const mainApi = new MainApi({
-  //baseUrl: 'https://api.elkod.nomoredomainsicu.ru',
-  baseUrl: 'http://127.0.0.1:3000',
+  baseUrl: 'https://api.elkod.nomoredomainsicu.ru',
+  //baseUrl: 'http://127.0.0.1:3000',
   headers: {
     authorization: '',
     'Content-Type': 'application/json'

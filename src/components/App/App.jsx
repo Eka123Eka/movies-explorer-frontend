@@ -32,13 +32,15 @@ function App() {
 
   const _handleError = function (err, action = '') {
     let currentError = ''
-    if (err.includes('401') || err.includes('403')) {
+    if (err.includes('401') || err.includes('400')) {
       if (action === 'reg') {currentError = messages.reg_error}
       else if (action === 'login') {currentError = messages.login_error}
       else {currentError = messages.other_error}
     }
     else if (err.includes('409')) {currentError = messages.reg_conflict}
     else if (err.includes('500')) {currentError = messages.server_error}
+    else if (err.includes('404')) {currentError = messages.search_not_added}
+    else if (err.includes('403')) {currentError = messages.conflict_unsetLike}
     else {currentError = messages.other_error}
     return currentError;
   }
@@ -52,6 +54,9 @@ function App() {
       auth.checkToken(token)
         .then(() => {
           setIsLogIn(true);
+          if (localStorage.getItem('cards')) {
+            setCards(JSON.parse(localStorage.getItem('cards')));
+          }
           navigate(pathname);
         })
         .catch(console.error)
@@ -69,28 +74,30 @@ function App() {
       .catch(console.error)
       .finally(setIsLoading(false))
   }, [isLogIn]);
-  //3. получим список фильмов
-  useEffect(() => {
+  // //3. получим список фильмов
+  function getMoviesServer() {
     if (!isLogIn) return;
     setIsLoading(true);
     moviesApi.getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(console.error)
-      .finally(setIsLoading(false))
-  }, [isLogIn]);
-  //4. получим список избранного
-  useEffect(() => {
-    if (!isLogIn) return;
+    .then(res => setCards(res))
+    .catch((err) => {
+      console.log(err);
+      setServerError(messages.default_error);
+      setSuccessAction(false);
+      setIsInfoPopupOpen(true);})
+    .finally(() => setIsLoading(false));
     setIsLoading(true);
     mainApi.getFavoriteMovies()
-      .then((res) => {
-        setFavoriteMovies(res);
-      })
-      .catch(console.error)
-      .finally(setIsLoading(false))
-  }, [isLogIn]);
+    .then(res =>  setFavoriteMovies(res))
+    .catch(err => {
+      console.log(err);
+      if (!err.includes('404(')) {
+      setServerError(_handleError(err));
+      setSuccessAction(false);
+      setIsInfoPopupOpen(true);}
+    })
+    .finally(() => setIsLoading(false))
+  }
   //5. Зарегистрируемся
   function handleRegister(inputData) {
     setIsLoading(true);
@@ -108,7 +115,6 @@ function App() {
         setIsInfoPopupOpen(true);
       })
       .finally(setIsLoading(false))
-      console.log('три');
   }
   // 6. Авторизуемся
   function handleAuthorization(authData) {
@@ -127,7 +133,6 @@ function App() {
         setIsInfoPopupOpen(true);
       })
       .finally(setIsLoading(false))
-      console.log('четыре');
   }
   //7. Отредактируем пользователя
   function handleUpdateUser(dataUser) {
@@ -146,46 +151,53 @@ function App() {
         setIsInfoPopupOpen(true);
       })
       .finally(() => setIsLoading(false))
-      console.log('шесть');
   }
   //8. Добавим в избранное или удалим из избранного
   function handleSetLikeCard(card, isLiked) {
     setIsLoading(true);
     if (isLiked) {
-      mainApi.unsetLikeCard(card._id)
+      mainApi.unsetLikeCard(favoriteMovies.find(item => item.movieId === card.id)._id)
         .then(res => {
           const updateList = favoriteMovies.filter(item => item && item._id !== res._id );
           setFavoriteMovies(updateList);
         })
-        .catch(console.error)
+        .catch((err) => {
+          console.log(err);
+          setServerError(_handleError(err));
+          setSuccessAction(false);
+          setIsInfoPopupOpen(true);
+        })
         .finally(() => setIsLoading(false));
     } else {
       mainApi.setLikeCard(card)
-        .then(res => {setFavoriteMovies([res, ...favoriteMovies])})
+        .then(res => {
+          setFavoriteMovies([res, ...favoriteMovies])})
         .catch(console.error)
         .finally(() => setIsLoading(false));
     }
-    console.log('семь');
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
   }
   // 9. Разлогинимся
-  const handleLogOut = () => {
-    localStorage.removeItem('JWT');
-    localStorage.removeItem('dataUser');
+  function handleLogOut () {
+     localStorage.removeItem('JWT');
+     localStorage.removeItem('favoriteMovies');
+     localStorage.removeItem('cards');
+     localStorage.removeItem('searchQuery');
+     localStorage.removeItem('stateCheckbox');
+     localStorage.removeItem('currentCards');
+    //localStorage.clear();
     setIsLogIn(false);
   }
   //10. Закрыть все попапы
   function closeAllPopups() {
     setIsInfoPopupOpen(false);
   }
-
-  //11. Внутренний универсальный обработчик
-  // function handleRequest(request) {
-  //   setIsLoading(true);
-  //   request()
-  //     .then(closeAllPopups)
-  //     .catch(console.error)
-  //     .finally(() => setIsLoading(false));
-  // }
+  //11. Обновим избранное в хранилище
+  const updateFavorite = () => {
+    if (favoriteMovies.length === 0 && localStorage.getItem('favoriteMovies') &&
+        JSON.parse(localStorage.getItem('favoriteMovies')).length !== 0)
+          { setFavoriteMovies(JSON.parse(localStorage.getItem('favoriteMovies'))) }
+  }
 
   return (
     <div className='app'>
@@ -216,13 +228,16 @@ function App() {
                 cards={cards}
                 favoriteMovies={favoriteMovies}
                 onSetLikeCard={handleSetLikeCard}
+                getMoviesServer = {getMoviesServer}
               />}
             />
             <Route exact path='/saved-movies'
               element={<ProtectedRoute
                 element = {SavedMovies}
                 isLogIn = {isLogIn}
+                cards={cards}
                 favoriteMovies={favoriteMovies}
+                updateFavorite={updateFavorite}
                 onSetLikeCard={handleSetLikeCard}
               />}
             />

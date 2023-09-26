@@ -1,14 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import deleteButton from '../../../images/delete-button.svg';
-import { moviesApi } from '../../';
+import { const_for_movies } from '../../';
 import './MoviesCard.css';
 
-function MoviesCard({card, favoriteMovies, onSetLikeCard}) {
-  const location = useLocation();
-  const isPageMovies = location.pathname === '/movies';
-  const isPageSavedMovies = location.pathname === '/saved-movies';
+function MoviesCard({card, favoriteMovies, onSetLikeCard, fromMoviePage}) {
 
-  const image = card.image.url ? `${moviesApi.baseUrl}/${card.image.url}` : card.image;
+  const image = card.image.url ? `${const_for_movies.baseUrl}${card.image.url}` : card.image;
   const isfavoriteMovies = favoriteMovies ? favoriteMovies.some((i) => i.movieId === card.id) : false;
 
   function toggleLike() {
@@ -18,7 +14,7 @@ function MoviesCard({card, favoriteMovies, onSetLikeCard}) {
   function convertTime (time) {
     let m = time % 60;
     let h = (time-m)/60;
-    return `${h < 10 ? '0' : ''} ${h.toString()}ч${m < 10 ? '0' : ''}${m.toString()}м`;
+    return `${h.toString()}ч${m < 10 ? '0' : ''}${m.toString()}м`;
   }
 
   return (
@@ -31,7 +27,7 @@ function MoviesCard({card, favoriteMovies, onSetLikeCard}) {
           <h2 className='card__title'>{card.nameRU}</h2>
           <p className='card__duration'>{convertTime(card.duration)}</p>
         </div>
-        { isPageMovies && ( isfavoriteMovies
+        { fromMoviePage && ( isfavoriteMovies
           ? ( <button
               className='card__icon card__icon_favorite'
               aria-label='Добавлено в избранное.'
@@ -44,10 +40,11 @@ function MoviesCard({card, favoriteMovies, onSetLikeCard}) {
               type='button'></button> )
           )
         }
-        { isPageSavedMovies && (
+        { !fromMoviePage && (
           <button
             className='card__delete-button'
             aria-label='Удалить из избранного.'
+            onClick={toggleLike}
             type='button'>
               <img className='card__delete-icon' alt='Удалить из избранного.' src={deleteButton} />
           </button>

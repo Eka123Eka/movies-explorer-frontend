@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../';
 import './Profile.css';
 
-function Profile ({isLogIn, handleLogOut, onUpdateUser}) {
+function Profile ({isLogIn, onLogOut, onUpdateUser}) {
   const { values, handleChange, errors, isValid, setValues } = useFormValidation({});
   const { isLoading } = useContext(AppContext);
   const currentUser = useContext(CurrentUserContext);
@@ -64,7 +64,7 @@ function Profile ({isLogIn, handleLogOut, onUpdateUser}) {
                   : ''}`} type='submit'>
                 {( isLoading) ? 'Профиль обновляется...' : 'Редактировать'}
               </button>
-              <Link className='profile__quit-link' to='/signin' onClick={handleLogOut}>Выйти из аккаунта</Link>
+              <Link className='profile__quit-link' to='/signin' onClick={onLogOut}>Выйти из аккаунта</Link>
             </div>
           </form>
         </div>
