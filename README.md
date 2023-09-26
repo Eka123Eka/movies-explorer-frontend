@@ -12,7 +12,7 @@
 https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC
 
 ### Ссылка на pullRequest
-
+https://github.com/Eka123Eka/movies-explorer-frontend/pull/2#issue-1913176915
 
 ### Ссылки на проект
 
