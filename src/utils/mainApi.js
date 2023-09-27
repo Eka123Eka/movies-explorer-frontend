@@ -1,5 +1,5 @@
 import baseUtils from './baseUtils';
-import {const_for_movies} from './constants';
+import { CONST_FOR_MOVIES } from './constants';
 
 class MainApi extends baseUtils {
   constructor({ baseUrl, headers }) {
@@ -27,15 +27,15 @@ class MainApi extends baseUtils {
       headers: this._headers,
       method: 'POST',
       body: JSON.stringify({
-        year:        card.year,
-        image:       `${const_for_movies.baseUrl}/${card.image.url}`,
-        nameRU:      card.nameRU,
-        nameEN:      card.nameEN,
-        movieId:     card.id,
-        country:     card.country,
-        director:    card.director,
-        duration:    card.duration,
-        thumbnail:   `${const_for_movies.baseUrl}/${card.image.formats.thumbnail.url}`,
+        year: card.year,
+        image: `${CONST_FOR_MOVIES.BASEURL}/${card.image.url}`,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN,
+        movieId: card.id,
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        thumbnail: `${CONST_FOR_MOVIES.BASEURL}/${card.image.formats.thumbnail.url}`,
         description: card.description,
         trailerLink: card.trailerLink,
       }),

@@ -10,7 +10,7 @@ class Auth extends baseUtils {
     }, `POST checkToken ${!token} - `);
   }
   // 2. Зарегистрируемся
-  register({name, email, password }) {
+  register({ name, email, password }) {
     return this._request('/signup', {
       headers: this._headers,
       method: 'POST',
@@ -27,7 +27,7 @@ class Auth extends baseUtils {
   }
 }
 
-const auth = new Auth ({
+const auth = new Auth({
   baseUrl: 'https://api.elkod.nomoredomainsicu.ru',
   //baseUrl: 'http://127.0.0.1:3000',
   headers: {

@@ -6,10 +6,9 @@ class baseUtils {
 
   async _request(url, props, sourceError, withToken = false) {
     if (withToken) {
-      props.headers.authorization =  `Bearer ${localStorage.getItem('JWT')}`
+      props.headers.authorization = `Bearer ${localStorage.getItem('JWT')}`
     }
-    /*console.log(this._baseUrl, url, sourceError)*/
-    const res = await fetch( `${this._baseUrl}${url}`, props );
+    const res = await fetch(`${this._baseUrl}${url}`, props);
     return this._checkResponse(res, sourceError);
   }
 

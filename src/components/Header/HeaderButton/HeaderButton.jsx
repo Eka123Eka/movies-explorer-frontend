@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import './HeaderButton.css';
 
-function HeaderButton( {textButton, ...rest}) {
+function HeaderButton({ textButton, ...rest }) {
 
   return (
-    <Link { ...rest }>
+    <Link {...rest}>
       {textButton}
     </Link>
   )

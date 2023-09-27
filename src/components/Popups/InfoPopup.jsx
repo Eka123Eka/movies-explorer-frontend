@@ -6,10 +6,10 @@ import successRegImage from '../../images/success_registration.svg';
 import failureRegImage from '../../images/failure_registration.svg';
 import './InfoPopup.css'
 function InfoPopup({ isOpen, onClose, isSuccess }) {
-  const {serverError} = useContext(AppContext);
+  const { serverError } = useContext(AppContext);
   return (
     <>
-      <Popup isOpen = {isOpen} name = 'info-tooltip' onClose = {onClose}>
+      <Popup isOpen={isOpen} name='info-tooltip' onClose={onClose}>
         <div className='popup__container popup__container_type_tooltip'>
           <button className='popup__button-close' type='button' aria-label='Закрыть форму' onClick={onClose}></button>
           <img className='popup__picture-tooltip' src={isSuccess ? successRegImage : failureRegImage}

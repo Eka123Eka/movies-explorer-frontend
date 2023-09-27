@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { const_for_movies } from '../';
+import { CONST_FOR_MOVIES } from '../';
 import validator from 'validator';
 
 export default function useFormValidation() {
@@ -11,26 +11,20 @@ export default function useFormValidation() {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    setValues({...values, [name]: value});
+    setValues({ ...values, [name]: value });
 
     if (name === "email" && value.length !== 0) {
-      const isValidEmail = validator.isEmail(value);
+      const isValidEmail = validator.isEmail(value) && CONST_FOR_MOVIES.REGEX_EMAIL.test(value);
       setErrors({ ...errors, [name]: isValidEmail ? '' : 'Некорректно введен email' });
       setIsValid(target.closest('form').checkValidity() && isValidEmail);
-    } else {
-      setErrors({...errors, [name]: target.validationMessage });
-      setIsValid(target.closest('form').checkValidity());
-    }
-
-    if (name === "name" && value.length !== 0) {
-      const isValidName = const_for_movies.regEX_name.test(value);
+    } else if (name === "name" && value.length !== 0) {
+      const isValidName = CONST_FOR_MOVIES.REGEX_NAME.test(value);
       setErrors({ ...errors, [name]: isValidName ? '' : 'Некорректно указано имя, только буквы, пробел и дефис' });
       setIsValid(target.closest('form').checkValidity() && isValidName);
     } else {
-      setErrors({...errors, [name]: target.validationMessage });
+      setErrors({ ...errors, [name]: target.validationMessage });
       setIsValid(target.closest('form').checkValidity());
     }
-
   };
 
   const resetForm = useCallback(

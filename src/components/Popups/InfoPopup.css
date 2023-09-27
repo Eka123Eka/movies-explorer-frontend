@@ -5,15 +5,11 @@
   align-items: center;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  /*opacity: 0;
-  visibility: hidden;*/
   transition: visibility .5s, opacity 0.5s ease-in;
 }
 
 .popup_opened {
   display: flex;
-  /*opacity: 1;
-  visibility: visible;*/
 }
 
 .popup_type_info-tooltip {
@@ -92,12 +88,15 @@
     font-size: 20px;
     line-height: 24px;
   }
+
   .popup__title-tooltip:first-of-type {
     margin-top: 40px;
   }
+
   .popup__title-tooltip:last-of-type {
     margin-bottom: 50px;
   }
+
   .popup__button-close {
     width: 20px;
     height: 20px;
@@ -105,4 +104,3 @@
     right: 0;
   }
 }
-

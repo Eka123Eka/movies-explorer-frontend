@@ -1,75 +1,85 @@
-import { useState, useEffect, useMemo } from 'react';
-import { MoviesCard, const_for_movies } from '../../';
+import { useState, useEffect } from 'react';
+import { MoviesCard, CONST_FOR_MOVIES } from '../../';
 import './MoviesCardList.css';
 
-function MoviesCardList({ findingCards, favoriteMovies, onSetLikeCard, fromMoviePage }) {
-  const [dimension, setDimension] = useState({ width: 0 });
+function MoviesCardList({ findingCards, onSetLikeCard, fromMoviePage }) {
+
+  const [currentCards, setCurrentCards] = useState([]);
+  const [restCards, setRestCards] = useState([]);
   const [countIncrementCard, setCountIncrementCard] = useState(0);
   const [startCards, setStartCards] = useState(0);
 
   function getDimension() {
-    setTimeout((e) => { setDimension({ width: window.innerWidth}) }, 100);
+    setTimeout((e) => {
+    calcCards(window.innerWidth);
+    }, 100);
+  }
+
+  function calcCards(width) {
+    if (width < CONST_FOR_MOVIES.WIDTH_ONE_CARD) {
+      setStartCards(CONST_FOR_MOVIES.CARDS_ON_320);
+      setCountIncrementCard(CONST_FOR_MOVIES.CARDS_ADD_320);
+    } else if (width < CONST_FOR_MOVIES.WIDTH_TWO_CARD) {
+      setStartCards(CONST_FOR_MOVIES.CARDS_ON_768);
+      setCountIncrementCard(CONST_FOR_MOVIES.CARDS_ADD_768);
+    } else if (width < CONST_FOR_MOVIES.WIDTH_TREE_CARD) {
+      setStartCards(CONST_FOR_MOVIES.CARDS_ON_1000);
+      setCountIncrementCard(CONST_FOR_MOVIES.CARDS_ADD_1000);
+    } else {
+      setStartCards(CONST_FOR_MOVIES.CARDS_ON_1280);
+      setCountIncrementCard(CONST_FOR_MOVIES.CARDS_ADD_1280);
+    }
   }
 
   useEffect(() => {
-    setCountIncrementCard(0);
     getDimension();
-
-    window.addEventListener("resize", getDimension);
-    return () => window.removeEventListener("resize", getDimension);
+    window.addEventListener('resize', getDimension);
+    return () => window.removeEventListener('resize', getDimension);
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
   useEffect(() => {
-    setCountIncrementCard(0);
-  }, [findingCards]);
+    let newStartCard = currentCards.length;
+    if (startCards > newStartCard) {
+      newStartCard = startCards;
+    }
+    setCurrentCards(findingCards.slice(0, newStartCard))
+    setRestCards(findingCards.slice(newStartCard))
+  }, [findingCards, startCards]);
+
 
   function handleAddCardMoreButton() {
-    let countNewCards;
-    if (dimension.width < const_for_movies.width_one_card) {countNewCards = const_for_movies.cards_add_320}
-    else if (dimension.width < const_for_movies.width_two_card) {countNewCards = const_for_movies.cards_add_768}
-    else if (dimension.width < const_for_movies.width_three_card) {countNewCards = const_for_movies.cards_add_1000}
-    else {countNewCards = const_for_movies.cards_add_1280}
-    if (!(dimension.width < const_for_movies.width_one_card)) {
-      countNewCards = (countNewCards - (startCards+  countIncrementCard + countNewCards)%countNewCards);
+    let newIncrementCard = countIncrementCard;
+    if (startCards !== CONST_FOR_MOVIES.CARDS_ON_320) {
+      newIncrementCard = newIncrementCard - currentCards.length % newIncrementCard;
     }
-    setCountIncrementCard(prevValue => prevValue + countNewCards);
+    const newCards = [...currentCards, ...restCards.slice(0, newIncrementCard)];
+    setCurrentCards(newCards);
+    setRestCards(restCards.slice(newIncrementCard))
+
   }
 
-  const currentCards = useMemo(() => {
-    if (!fromMoviePage) {
-      return findingCards;
-    }
-    let countCards = 0;
-    if (dimension.width < const_for_movies.width_one_card) {countCards = const_for_movies.cards_on_320}
-    else if (dimension.width < const_for_movies.width_two_card) {countCards = const_for_movies.cards_on_768}
-    else if (dimension.width < const_for_movies.width_three_card) {countCards = const_for_movies.cards_on_1000}
-    else {countCards = const_for_movies.cards_on_1280}
-    setStartCards(countCards);
-    // if (findingCards && findingCards.length < cards.length) {
-    //   return findingCards;
-    // } else {
-      return findingCards.slice(0, countCards + countIncrementCard);
-    //}
-    /* eslint-disable react-hooks/exhaustive-deps */
-    }, [findingCards, countIncrementCard, dimension]);
+  function handleLike(card, isfavoriteMovies) {
+    onSetLikeCard(card, isfavoriteMovies);
+    if (!fromMoviePage) { setCurrentCards([...currentCards.filter(item => item && item.id !== card.id)]) }
+  }
 
-  const remainCards = findingCards.length > startCards && findingCards.length > currentCards.length;
+  const remainMoreCards = currentCards.length > 0 && restCards.length > 0;
 
   return (
     <section className='cards' aria-label='Секция с фильмами'>
       <ul className='cards-list'>
-        { currentCards.map(movie => (
+        {currentCards.map(movie => (
           <li key={movie.id || movie.movieId}>
             <MoviesCard
               card={movie}
-              favoriteMovies = {favoriteMovies}
-              onSetLikeCard = {onSetLikeCard}
-              fromMoviePage = {fromMoviePage}
+              onSetLikeCard={handleLike}
+              fromMoviePage={fromMoviePage}
             />
           </li>)
         )}
       </ul>
-      { remainCards && fromMoviePage && <button className='cards-more-button' onClick={handleAddCardMoreButton} >Ещё</button> }
+      {remainMoreCards && fromMoviePage && <button className='cards-more-button' onClick={handleAddCardMoreButton} >Ещё</button>}
     </section>
   );
 }

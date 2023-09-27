@@ -11,10 +11,10 @@ class MoviesApi extends baseUtils {
 }
 
 const moviesApi = new MoviesApi({
-    baseUrl: 'https://api.nomoreparties.co',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  });
+  baseUrl: 'https://api.nomoreparties.co',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+});
 
 export default moviesApi;

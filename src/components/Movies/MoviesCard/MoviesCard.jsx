@@ -1,25 +1,28 @@
+import { useState } from 'react';
 import deleteButton from '../../../images/delete-button.svg';
-import { const_for_movies } from '../../';
+import { CONST_FOR_MOVIES } from '../../';
 import './MoviesCard.css';
 
-function MoviesCard({card, favoriteMovies, onSetLikeCard, fromMoviePage}) {
+function MoviesCard({ card, onSetLikeCard, fromMoviePage }) {
 
-  const image = card.image.url ? `${const_for_movies.baseUrl}${card.image.url}` : card.image;
-  const isfavoriteMovies = favoriteMovies ? favoriteMovies.some((i) => i.movieId === card.id) : false;
+  const image = card.image.url ? `${CONST_FOR_MOVIES.BASEURL}${card.image.url}` : card.image;
+  const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
+  const [isfavoriteMovies, setIsfavoriteMovies] = useState(favoriteMovies ? favoriteMovies.some((i) => i.movieId === card.id) : false);
 
   function toggleLike() {
     onSetLikeCard(card, isfavoriteMovies);
+    if (fromMoviePage) { setIsfavoriteMovies(!isfavoriteMovies) };
   }
 
-  function convertTime (time) {
+  function convertTime(time) {
     let m = time % 60;
-    let h = (time-m)/60;
+    let h = (time - m) / 60;
     return `${h.toString()}ч${m < 10 ? '0' : ''}${m.toString()}м`;
   }
 
   return (
     <article className='card'>
-      <a className='card__link' href={ card.trailerLink } target='_blank' rel='noreferrer'>
+      <a className='card__link' href={card.trailerLink} target='_blank' rel='noreferrer'>
         <img className='card__image' src={image} alt={card.nameRU} />
       </a>
       <div className='card__container'>
@@ -27,26 +30,26 @@ function MoviesCard({card, favoriteMovies, onSetLikeCard, fromMoviePage}) {
           <h2 className='card__title'>{card.nameRU}</h2>
           <p className='card__duration'>{convertTime(card.duration)}</p>
         </div>
-        { fromMoviePage && ( isfavoriteMovies
-          ? ( <button
-              className='card__icon card__icon_favorite'
-              aria-label='Добавлено в избранное.'
-              onClick={toggleLike}
-              type='button'></button> )
-          : ( <button
-              className='card__icon card__icon_add'
-              aria-label='Добавить в избранное.'
-              onClick={toggleLike}
-              type='button'></button> )
-          )
+        {fromMoviePage && (isfavoriteMovies
+          ? (<button
+            className='card__icon card__icon_favorite'
+            aria-label='Добавлено в избранное.'
+            onClick={toggleLike}
+            type='button'></button>)
+          : (<button
+            className='card__icon card__icon_add'
+            aria-label='Добавить в избранное.'
+            onClick={toggleLike}
+            type='button'></button>)
+        )
         }
-        { !fromMoviePage && (
+        {!fromMoviePage && (
           <button
             className='card__delete-button'
             aria-label='Удалить из избранного.'
             onClick={toggleLike}
             type='button'>
-              <img className='card__delete-icon' alt='Удалить из избранного.' src={deleteButton} />
+            <img className='card__delete-icon' alt='Удалить из избранного.' src={deleteButton} />
           </button>
         )}
       </div>
