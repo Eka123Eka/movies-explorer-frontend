@@ -39,7 +39,7 @@ function App() {
           setIsLogIn(true);
         })
         .catch(console.error)
-        .finally(() => setIsLoading(false));
+        .finally(() => setIsLoading(false))
     }
   }, [isLogIn]);
   //2. получим данные пользователя
@@ -107,7 +107,7 @@ function App() {
   }
   //7. Отредактируем пользователя
   function handleUpdateUser(dataUser) {
-    setIsLogIn(true);
+    setIsLoading(true);
     mainApi.sendUserInfo(dataUser)
       .then((res) => {
         setCurrentUser(res);
@@ -132,7 +132,6 @@ function App() {
             setIsfavoriteMovies(!isLiked)
           } else {
             getCards();
-            //setFindingCards([]); //[([...favoriteMovies])]
           }
         })
         .catch((err) => {

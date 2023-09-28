@@ -1,13 +1,13 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { CurrentUserContext, useFormValidation } from '../';
 import { Link } from 'react-router-dom';
-import { Header } from '../';
+import { Header, AppContext } from '../';
 import './Profile.css';
 
 function Profile({ isLogIn, onLogOut, onUpdateUser }) {
   const { values, handleChange, errors, isValid, setValues } = useFormValidation({});
   const currentUser = useContext(CurrentUserContext);
-  const [isBlockForm, setIsBlockForm] = useState(false);
+  const { isLoading } = useContext(AppContext);
 
   useEffect(() => {
     setValues(currentUser);
@@ -15,17 +15,8 @@ function Profile({ isLogIn, onLogOut, onUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setIsBlockForm(true);
+    onUpdateUser({ name: values.name, email: values.email });
   }
-
-  useEffect(() => {
-    if (isBlockForm) {
-      let updateUser = { name: values.name, email: values.email };
-      onUpdateUser(updateUser);
-    }
-    setIsBlockForm(false);
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [isBlockForm])
 
   return (
     <>
@@ -45,7 +36,7 @@ function Profile({ isLogIn, onLogOut, onUpdateUser }) {
                 required
                 value={values.name || ''}
                 onChange={handleChange}
-                disabled={isBlockForm && 'disabled'}
+                disabled={isLoading && 'disabled'}
               />
             </label>
             <p className="profile__input-error">{errors.name}</p>
@@ -61,16 +52,16 @@ function Profile({ isLogIn, onLogOut, onUpdateUser }) {
                 required
                 value={values.email || ''}
                 onChange={handleChange}
-                disabled={isBlockForm && 'disabled'}
+                disabled={isLoading && 'disabled'}
               />
             </label>
             <p className="profile__input-error">{errors.email}</p>
             <div className='profile__footer'>
               <button className={`profile__edit-button
-                ${(!isValid || isBlockForm || (values.name === currentUser.name && values.email === currentUser.email))
+                ${(!isValid || isLoading || (values.name === currentUser.name && values.email === currentUser.email))
                   ? 'profile__edit-button_disabled'
                   : ''}`} type='submit'>
-                {(isBlockForm) ? 'Профиль обновляется...' : 'Редактировать'}
+                {(isLoading) ? 'Профиль обновляется...' : 'Редактировать'}
               </button>
               <Link className='profile__quit-link' to='/' onClick={onLogOut}>Выйти из аккаунта</Link>
             </div>
