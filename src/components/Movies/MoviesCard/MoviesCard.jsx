@@ -10,8 +10,7 @@ function MoviesCard({ card, onSetLikeCard, fromMoviePage }) {
   const [isfavoriteMovies, setIsfavoriteMovies] = useState(favoriteMovies ? favoriteMovies.some((i) => i.movieId === card.id) : false);
 
   function toggleLike() {
-    onSetLikeCard(card, isfavoriteMovies);
-    if (fromMoviePage) { setIsfavoriteMovies(!isfavoriteMovies) };
+    onSetLikeCard(card, setIsfavoriteMovies, fromMoviePage);
   }
 
   function convertTime(time) {

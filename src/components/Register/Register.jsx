@@ -1,29 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Logo, useFormValidation } from '../';
+import { Logo, useFormValidation, AppContext } from '../';
 import './Register.css';
 
 function Register({ onSubmit }) {
-  const { values, handleChange, errors, isValid, resetForm } = useFormValidation({});
-  const [isBlockForm, setIsBlockForm] = useState(false);
+  const { values, handleChange, errors, isValid, resetForm, } = useFormValidation({});
+  const { isLoading } = useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit');
-    setIsBlockForm(true);
-
+    onSubmit({ name: values.name, email: values.email, password: values.password })
   };
+
   useEffect(() => {
     resetForm();
   }, [resetForm]);
-
-  useEffect(() => {
-    if (isBlockForm) {
-      onSubmit({ name: values.name, email: values.email, password: values.password })
-    }
-    setIsBlockForm(false);
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [isBlockForm])
 
   return (
     <section className='register'>
@@ -41,7 +32,7 @@ function Register({ onSubmit }) {
               required
               value={values.name || ''}
               onChange={handleChange}
-              disabled={isBlockForm && 'disabled'}
+              disabled={isLoading && 'disabled'}
             />
             <span className='register__input-error'>{errors.name}</span>
           </label>
@@ -57,7 +48,7 @@ function Register({ onSubmit }) {
               required
               value={values.email || ''}
               onChange={handleChange}
-              disabled={isBlockForm && 'disabled'}
+              disabled={isLoading && 'disabled'}
             />
             <span className='register__input-error'>{errors.email}</span>
           </label>
@@ -73,12 +64,12 @@ function Register({ onSubmit }) {
               required
               value={values.password || ''}
               onChange={handleChange}
-              disabled={isBlockForm && 'disabled'}
+              disabled={isLoading && 'disabled'}
             />
             <span className='register__input-error register__input-error_last'>{errors.password}</span>
           </label>
-          <button className={`register__button ${(!isValid || isBlockForm) ? 'register__button_disabled' : ''}`} type='submit'>
-            {(isBlockForm) ? 'Идет регистрация...' : 'Зарегистрироваться'}
+          <button className={`register__button ${(!isValid || isLoading) ? 'register__button_disabled' : ''}`} type='submit'>
+            {(isLoading) ? 'Идет регистрация...' : 'Зарегистрироваться'}
           </button>
           <p className='register__text-item'>
             Уже зарегистрированы?

@@ -20,6 +20,10 @@ function SavedMovies({ isLogIn, onSetLikeCard }) {
     getCards();
   }, [isChecked, searchText]);
 
+  function handleLike(card, setIsfavoriteMovies, fromMoviePage) {
+    onSetLikeCard(card, setIsfavoriteMovies, fromMoviePage, getCards);
+  }
+
   function getCards() {
     const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
     const cards = JSON.parse(localStorage.getItem('cards')) || [];
@@ -63,7 +67,7 @@ function SavedMovies({ isLogIn, onSetLikeCard }) {
           : <MoviesCardList
             fromMoviePage={false}
             findingCards={findingCards}
-            onSetLikeCard={onSetLikeCard}
+            onSetLikeCard={handleLike}
           />
         }
       </main>

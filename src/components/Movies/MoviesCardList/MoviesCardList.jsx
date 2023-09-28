@@ -55,13 +55,11 @@ function MoviesCardList({ findingCards, onSetLikeCard, fromMoviePage }) {
     }
     const newCards = [...currentCards, ...restCards.slice(0, newIncrementCard)];
     setCurrentCards(newCards);
-    setRestCards(restCards.slice(newIncrementCard))
-
+    setRestCards(restCards.slice(newIncrementCard));
   }
 
-  function handleLike(card, isfavoriteMovies) {
-    onSetLikeCard(card, isfavoriteMovies);
-    if (!fromMoviePage) { setCurrentCards([...currentCards.filter(item => item && item.id !== card.id)]) }
+  function handleLike(card, setIsfavoriteMovies, fromMoviePage) {
+    onSetLikeCard(card, setIsfavoriteMovies, fromMoviePage);
   }
 
   const remainMoreCards = currentCards.length > 0 && restCards.length > 0;

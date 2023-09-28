@@ -1,28 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Logo, useFormValidation } from '../';
+import { Logo, useFormValidation, AppContext } from '../';
 import './Login.css';
 
 function Login({ onSubmit }) {
   const { values, handleChange, errors, isValid, resetForm } = useFormValidation({});
-  const [isBlockForm, setIsBlockForm] = useState(false);
+  const { isLoading } = useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsBlockForm(true);
+    onSubmit({ email: values.email, password: values.password });
   };
 
   useEffect(() => {
     resetForm();
   }, [resetForm]);
-
-  useEffect(() => {
-    if (isBlockForm) {
-      onSubmit({ email: values.email, password: values.password })
-    }
-    setIsBlockForm(false);
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [isBlockForm])
 
   return (
     <section className='login'>
@@ -42,7 +34,7 @@ function Login({ onSubmit }) {
               required
               value={values.email || ""}
               onChange={handleChange}
-              disabled={isBlockForm && 'disabled'}
+              disabled={isLoading && 'disabled'}
             />
             <span className='login__input-error'>{errors.email}</span>
           </label>
@@ -58,12 +50,12 @@ function Login({ onSubmit }) {
               required
               value={values.password || ""}
               onChange={handleChange}
-              disabled={isBlockForm && 'disabled'}
+              disabled={isLoading && 'disabled'}
             />
             <span className='login__input-error login__input-error_last'>{errors.password}</span>
           </label>
-          <button className={`login__button ${(!isValid || isBlockForm) ? 'login__button_disabled' : ''}`} type='submit'>
-            {(isBlockForm) ? 'Авторизуемся...' : 'Войти'}
+          <button className={`login__button ${(!isValid || isLoading) ? 'login__button_disabled' : ''}`} type='submit'>
+            {(isLoading) ? 'Авторизуемся...' : 'Войти'}
           </button>
           <p className='login__text-item'>
             Еще не зарегистрированы?
