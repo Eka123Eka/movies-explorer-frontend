@@ -5,6 +5,7 @@
   margin: 0 auto;
   background-color: #202020;
 }
+
 .cards-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 270px);

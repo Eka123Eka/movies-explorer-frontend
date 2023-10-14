@@ -11,16 +11,16 @@ function Header({ isLogIn }) {
         <Logo />
       </div>
       {isLogIn
-        ? <Navigation isMainPage = {isMainPage}/>
+        ? <Navigation isMainPage={isMainPage} />
         : (location.pathname !== '/signup') && (location.pathname !== '/signin') && (
           <nav className='header__group-button'>
             <HeaderButton
-              textButton = 'Регистрация'
+              textButton='Регистрация'
               to='/signup'
               className='header__register-button header__link'
             />
             <HeaderButton
-              textButton = 'Войти'
+              textButton='Войти'
               to='/signin'
               className='header__login-button  header__link'
             />

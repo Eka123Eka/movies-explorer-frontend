@@ -29,10 +29,6 @@
   color: #8B8B8B;
 }
 
-.login__label:not(:first-child) {
-  margin-top: 20px;
-}
-
 .login__input {
   min-height: 46px;
   margin: 10px 0 0;
@@ -44,13 +40,12 @@
   border: none;
   border-radius: 8px;
   background-color: #2F2F2F;
-
 }
 
 .login__button {
   min-height: 45px;
   width: 100%;
-  margin: 179px 0 0;
+  margin: 157px 0 0;
   padding: 0;
   font-weight: 500;
   font-size: 14px;
@@ -65,6 +60,12 @@
 
 .login__button:hover {
   opacity: 0.8;
+}
+
+.login__button_disabled {
+  background: #F8F8F8;
+  color: #C2C2C2;
+  pointer-events: none;
 }
 
 .login__text-item {
@@ -84,6 +85,20 @@
 
 .login__link-item:hover {
   opacity: 0.7;
+}
+
+.login__input-error {
+  display: flex;
+  align-items: flex-end;
+  height: 20px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.login__input-error_last {
+  height: 22px;
 }
 
 @media screen and (max-width: 800px) {
@@ -118,5 +133,9 @@
     margin-top: 14px;
     font-size: 12px;
     line-height: 15px;
+  }
+
+  .login__input-error {
+    max-width: 260px;
   }
 }

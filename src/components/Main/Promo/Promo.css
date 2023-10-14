@@ -31,6 +31,7 @@
   height: 304px;
   width: 310px;
 }
+
 @media screen and (max-width: 1090px) {
   .promo__text {
     margin-right: 0;
@@ -97,6 +98,7 @@
     line-height: 38px;
     letter-spacing: -1.2px;
   }
+
   .promo__text {
     margin-top: 24px;
     margin-bottom: 80px;

@@ -43,22 +43,29 @@
   border: 3px solid #fff;
   border-radius: 50%;
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.09);
+  transition: opacity 0.3s linear;
+}
+
+.card__icon:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .card__icon_favorite {
   background-color: #2BE080;
 }
+
 .card__delete-button {
   margin: 0;
   padding: 0;
   background-color: #222222;
   border: none;
   transition: opacity 0.3s linear;
-  cursor: pointer;
 }
 
 .card__delete-button:hover {
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .card__delete-icon {
@@ -95,6 +102,7 @@
     width: 339px;
     height: 257px;
   }
+
   .card__link {
     width: 339px;
     height: 190px;
@@ -106,6 +114,7 @@
     width: 300px;
     height: 235px;
   }
+
   .card__link {
     width: 300px;
     height: 168px;

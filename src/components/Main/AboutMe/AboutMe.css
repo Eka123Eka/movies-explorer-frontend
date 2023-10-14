@@ -4,6 +4,7 @@
   padding: 110px 70px 100px;
   background: #202020;
 }
+
 .about-me__title {
   width: 100%;
   margin: 0;
@@ -52,7 +53,7 @@
   font-size: 14px;
   line-height: 22px;
   color: #FFF;
- }
+}
 
 .about-me__contacts {
   height: 17px;
@@ -61,7 +62,7 @@
   list-style: none;
 }
 
-.about-me__item{
+.about-me__item {
   height: 17px;
 }
 
